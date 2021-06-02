@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+  {% if programs %}
+    <h1 class="mb-5">Les 3 dernières séries de la catégorie :
+      {{ programs.1.category.name }}
+    </h1>
+    {% for program in programs %}
+    <div class="mb-5">
+      <h2>{{ program.id }}
+        /
+        <a href="{{path("program_show", { id: program.id }) }}">{{ program.title }}</a>
+      </h2>
+      <p>{{ program.synopsis }}</p>
+    </div>
+    {% else %}
+    Aucune série trouvée
+    {% endfor %}
+    {% endif %}
+    <a href="{{ path('category_index') }}">
+      Retour à la liste des catégories
+    </a>
+{% endblock %}
