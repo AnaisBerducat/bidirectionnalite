@@ -11,6 +11,9 @@
       <p>Description de la saison {{ season.number }}: {{ season.description }}</p>
       {% for episode in episodes %}
       <h2 class="mt-0">Episode: {{ episode.number }} / {{ episode.title }}</h2>
+      <a href="{{ path("program_episode_show", {"program_id": program.id, "season_id": season.id, "episode_id": episode.id}) }}">
+        Voir la fiche
+    </a>
       {% else %} Aucun épisode trouvé
       {% endfor %}
     </div>
