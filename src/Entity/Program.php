@@ -60,6 +60,11 @@ class Program
      */
     private $seasons;
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();

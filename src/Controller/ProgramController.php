@@ -110,7 +110,7 @@ class ProgramController extends AbstractController
 
     /**
      *
-     * @Route("/{program_id}/seasons/{season_id}",requirements={"season_id"="\d+" , "program_id"="\d+"}, name="season_show")
+     * @Route("/programs/{program_id}/seasons/{season_id}",requirements={"season_id"="\d+" , "program_id"="\d+"}, name="program_season_show")
      * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"program_id": "id"}})
      * @ParamConverter("season", class="App\Entity\Season", options={"mapping": {"season_id": "id"}})
      * @return Response
@@ -153,6 +153,40 @@ class ProgramController extends AbstractController
             'season' => $season,
             'episode' => $episode,
         ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="program_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Program $program): Response
+    {
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('program_index');
+        }
+
+        return $this->render('program/edit.html.twig', [
+            'program' => $program,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="program_delete", methods={"POST"})
+     */
+    public function delete(Request $request, Program $program): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$program->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($program);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('program_index');
     }
 
 }

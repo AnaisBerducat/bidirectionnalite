@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Repository\ProgramRepository;
 use App\Repository\EpisodeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,7 +20,7 @@ class Episode
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=season::class, inversedBy="episodes")
+     * @ORM\ManyToOne(targetEntity=Season::class, inversedBy="episodes")
      */
     private $season;
 
@@ -36,6 +38,16 @@ class Episode
      * @ORM\Column(type="text")
      */
     private $synopsis;
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    public function __construct()
+    {
+        $this->episodes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
