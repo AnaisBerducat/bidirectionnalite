@@ -47,7 +47,7 @@ class ProgramController extends AbstractController
 
  *
 
- * @Route("/show/{id<^[0-9]+$>}", name="program_show")
+ * @Route("/programs/{id}", name="program_show")
 
  * @return Response
 
@@ -116,6 +116,22 @@ class ProgramController extends AbstractController
             'episodes' => $episodes,
         ]);
 
+    }
+
+    /**
+     *
+     * @Route("/programs/{programId}/seasons/{seasonId}/episodes/{episodeId}", name="program_episode_show")
+     * @return Response
+     */
+
+    public function showEpisode(Program $program, Season $season, Episode $episode)
+    {
+
+        return $this->render('program/episode_show.html.twig', [
+            'program' => $program,
+            'season' => $season,
+            'episode' => $episode,
+        ]);
     }
 
 }
