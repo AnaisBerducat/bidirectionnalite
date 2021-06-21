@@ -17,18 +17,17 @@ class ProgramType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('summary', TextType::class)
-            ->add('synopsis', TextType::class)
             ->add('poster', TextType::class)
             ->add('country', TextType::class)
             ->add('year', TextType::class)
             ->add('category', null, ['choice_label' => 'name'])
-        ;
-        $builder->add('actorsGenuses', EntityType::class, [
-            'class' => Actor::class,
-            'choice_label' => 'name',
-            'multiple' => true,
-            'expanded' => true,
-        ]);
+            ->add('actors', EntityType::class, [
+                'class' => Actor::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

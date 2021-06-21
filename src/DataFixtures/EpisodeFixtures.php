@@ -22,7 +22,6 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
         $episode = new Episode();
         $episode->setTitle('Walking dead');
         $episode->setNumber('12');
-        $episode->setSynopsis('Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores itaque molestiae debitis neque ipsa, accusantium quod. Ab inventore molestiae distinctio dolorum repellat perspiciatis harum ratione porro? Sunt praesentium corporis nam!');
         $episode->setSlug($this->input->generate($episode->getTitle()));
         $manager->persist($episode);
         $manager->flush();
