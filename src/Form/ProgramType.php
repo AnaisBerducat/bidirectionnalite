@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\Actor;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ProgramType extends AbstractType
 {
@@ -21,6 +23,12 @@ class ProgramType extends AbstractType
             ->add('year', TextType::class)
             ->add('category', null, ['choice_label' => 'name'])
         ;
+        $builder->add('actorsGenuses', EntityType::class, [
+            'class' => Actor::class,
+            'choice_label' => 'name',
+            'multiple' => true,
+            'expanded' => true,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -29,4 +37,5 @@ class ProgramType extends AbstractType
             'data_class' => Program::class,
         ]);
     }
+
 }

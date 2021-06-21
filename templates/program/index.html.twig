@@ -8,15 +8,15 @@
             <h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
             <p>{{ program.summary }}</p>
             {# Lien vers la fiche de la série : #}
-            <a href="{{ path("program_show", { id: program.id }) }}">Voir la fiche</a>
-            <a href="{{ path("program_edit", { id: program.id }) }}">Edit</a>
+            <a href="{{ path("program_show", { slug: program.slug }) }}">Voir la fiche</a>
+            <a href="{{ path("program_edit", { slug: program.slug }) }}">Edit</a>
             {{ include('program/_delete_form.html.twig') }}
         </div>
     {% else %}
         Aucune série trouvée.
     {% endfor %}
 
-    <a href="{{ path('new_program') }}">
+    <a href="{{ path('program_new') }}">
 
         Créer un nouveau programme
     </a><br>
